@@ -121,7 +121,7 @@
     </div>
 
     <div class="line5">
-        <a href="/chatOpen" target="_blank" onclick="window.open(this.href, '', 'width=520, height=820'); return false;">채팅하기</a>
+        <a target="_blank" onclick="window.open(this.href, '', 'width=520, height=820'); return false;" th:onclick=" 'window.open(\'/rooms/'+ @{${ch_code}} + '\',\'width=520, height=820\' ) '">채팅하기</a>
         <a href="/board">목록</a>
         <a th:if="${po_delete == 'true'}" th:href="@{/postDelete(po_num=${po_num})}" style="margin-right: 8px;">삭제</a>
     </div>

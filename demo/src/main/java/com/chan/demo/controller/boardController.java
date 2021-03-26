@@ -76,6 +76,7 @@ public class boardController {
         bv.setPo_date(toDay);
 
         bs.postWrite(bv);
+        String post_num = bs.getPostNum();
         
         //채팅
         ChatRoom cr = chatRoomRepository.createChatRoom(bv.getPo_name());
@@ -84,7 +85,7 @@ public class boardController {
         String ch_name = cr.getName();
         String ch_mmcode1 = bv.getPo_mmcode();
         String ch_mmcode2 = "-";
-        int ch_postnum = 10;
+        int ch_postnum = Integer.parseInt(post_num);
 
         chattingVO cv = new chattingVO(ch_code,ch_name,ch_mmcode1,ch_mmcode2,ch_postnum);
 
@@ -140,6 +141,11 @@ public class boardController {
                     model.addAttribute("po_delete", "false");
                 }
             }
+            
+            //해당하는 채팅방 불러오기
+            String ch_code = cs.getChCode(po_num);
+            model.addAttribute("ch_code", ch_code);
+            
         }else {
             //로그인x
 

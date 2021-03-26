@@ -41,7 +41,7 @@ public class chatController {
 
         ChatRoom room = chatRoomRepository.findRoomById(id);
         model.addAttribute("room",room);
-        model.addAttribute("mm_name", (String) session.getAttribute("mm_name1") );
+        model.addAttribute("mm_name", (String) session.getAttribute("mm_name") );
         return "article/room";
     }
 

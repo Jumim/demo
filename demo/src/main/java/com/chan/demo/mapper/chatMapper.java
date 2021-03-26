@@ -12,5 +12,6 @@ import javax.validation.Valid;
 public interface chatMapper {
 
     public void setChatRoom(@Valid chattingVO cv);
+    public String getChCode(int ch_postnum);
 
 }

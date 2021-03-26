@@ -33,4 +33,8 @@ public class boardService {
         bm.postDelete(po_num);
     }
 
+    public String getPostNum() {
+        return bm.getPostNum();
+    }
+
 }

@@ -17,5 +17,6 @@ public class chatService {
     public void setChatRoom(@Valid chattingVO cv) {
         cm.setChatRoom(cv);
     }
+    public String getChCode(int ch_postnum){ return cm.getChCode(ch_postnum); }
 
 }

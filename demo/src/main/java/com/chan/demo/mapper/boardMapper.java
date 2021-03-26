@@ -15,4 +15,5 @@ public interface boardMapper {
     public void postWrite(@Valid boardVO bv);
     public boardVO postView(int po_num);
     public void postDelete(int po_num);
+    public String getPostNum();
 }

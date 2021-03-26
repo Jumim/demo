@@ -6,4 +6,12 @@
         insert into chat (`CH_CODE`, `CH_NAME`, `CH_MMCODE1`, `CH_MMCODE2`, `CH_POSTNUM`)
         values(#{ch_code}, #{ch_name}, #{ch_mmcode1}, #{ch_mmcode2}, ${ch_postnum})
     </insert>
+
+    <select id="getChCode" resultType="String">
+        select
+        ch_code
+        from chat
+        where ch_postnum = #{ch_postnum}
+    </select>
+
 </mapper>

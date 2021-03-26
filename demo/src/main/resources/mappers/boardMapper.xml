@@ -28,4 +28,11 @@
         where po_num = #{po_num}
     </delete>
 
+    <select id="getPostNum" resultType="String">
+        select
+        po_num
+        from post
+        order by po_num desc limit 1
+    </select>
+
 </mapper>
