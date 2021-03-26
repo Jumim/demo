@@ -29,9 +29,8 @@ public class boardController {
 
     private final ChatRoomRepository chatRoomRepository;
 
-    @Autowired
-    private boardService bs;
-    private chatService cs;
+    @Autowired private boardService bs;
+    @Autowired private chatService cs;
 
     
     // 게시글 목록 페이지로 이동
@@ -79,16 +78,17 @@ public class boardController {
         bs.postWrite(bv);
         
         //채팅
-        chatRoomRepository.createChatRoom(bv.getPo_name());
-        
-        //null포인트 오류!!!
-        //chattingVO cv = new chattingVO();
+        ChatRoom cr = chatRoomRepository.createChatRoom(bv.getPo_name());
 
-        //cv.setCh_code(cr.getRoomId());
-        //cv.setCh_name(cr.getName());
-        //cv.setUsercht(2);
+        String ch_code = cr.getRoomId();
+        String ch_name = cr.getName();
+        String ch_mmcode1 = bv.getPo_mmcode();
+        String ch_mmcode2 = "-";
+        int ch_postnum = 10;
 
-        //cs.setChatRoom(cv);
+        chattingVO cv = new chattingVO(ch_code,ch_name,ch_mmcode1,ch_mmcode2,ch_postnum);
+
+        cs.setChatRoom(cv);
 
         return "redirect:board";
     }

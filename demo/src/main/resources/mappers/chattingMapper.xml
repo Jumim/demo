@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.chan.demo.mapper.chattingVO">
+<mapper namespace="com.chan.demo.mapper.chatMapper">
     <insert id="setChatRoom">
-        insert into chat values(#{ch_code}, #{ch_name}, #{ch_usercnt})
+        insert into chat (`CH_CODE`, `CH_NAME`, `CH_MMCODE1`, `CH_MMCODE2`, `CH_POSTNUM`)
+        values(#{ch_code}, #{ch_name}, #{ch_mmcode1}, #{ch_mmcode2}, ${ch_postnum})
     </insert>
 </mapper>

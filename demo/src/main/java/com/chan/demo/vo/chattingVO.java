@@ -1,32 +1,27 @@
 package com.chan.demo.vo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class chattingVO {
 
     private String ch_code;
     private String ch_name;
-    private int usercht;
+    private String ch_mmcode1;
+    private String ch_mmcode2;
+    private int ch_postnum;
 
-    public int getUsercht() {
-        return usercht;
-    }
-
-    public String getCh_code() {
-        return ch_code;
-    }
-
-    public String getCh_name() {
-        return ch_name;
-    }
-
-    public void setCh_code(String ch_code) {
+    public chattingVO(String ch_code, String ch_name, String ch_mmcode1, String ch_mmcode2, int ch_postnum){
+        super();
         this.ch_code = ch_code;
-    }
-
-    public void setCh_name(String ch_name) {
         this.ch_name = ch_name;
+        this.ch_mmcode1 = ch_mmcode1;
+        this.ch_mmcode2 = ch_mmcode2;
+        this.ch_postnum = ch_postnum;
     }
 
-    public void setUsercht(int usercht) {
-        this.usercht = usercht;
-    }
 }

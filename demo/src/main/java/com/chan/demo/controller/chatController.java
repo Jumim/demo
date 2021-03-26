@@ -45,20 +45,4 @@ public class chatController {
         return "article/room";
     }
 
-    /*
-    @GetMapping("/new")
-    public String make(Model model){
-        ChatRoomForm form = new ChatRoomForm();
-        model.addAttribute("form",form);
-        return "article/newRoom";
-    }
-
-    @PostMapping("/room/new")
-    public String makeRoom(ChatRoomForm form){
-        chatRoomRepository.createChatRoom(form.getName());
-
-        return "redirect:/";
-    }
-     */
-
 }
