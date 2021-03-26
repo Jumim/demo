@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>게시판 리스트</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+    <style>
+        body {
+            background: #fbaf50c4;
+        }
+
+        form {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            width: 580px;
+            height: 620px;
+            text-align: -webkit-center;
+            padding-top: 172px;
+            border-radius: 15px;
+        }
+
+        form input {
+            display: block;
+            background-color: transparent;
+            border: 1px solid #e6e6e6;
+            border-radius: 8px;
+            width: 80%;
+            font-size: 18px;
+            margin-top: 10px;
+            margin-bottom: 30px;
+            padding: 12px 5px;
+        }
+
+        form button {
+            border: none;
+            border-radius: 8px;
+            width: 80%;
+            padding: 15px 0;
+            background-color: #fbaf50c4;
+        }
+
+    </style>
+</head>
+<body>
+    <form action="loginGo" method="post">
+
+        <input type="text" placeholder="아이디" name="mm_id">
+        <input type="password" placeholder="비밀번호" name="mm_pwd">
+
+        <button type="submit">로그인</button>
+
+    </form>
+</body>
+</html>

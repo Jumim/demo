@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>채팅 서비스</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+    <style>
+        @font-face {
+            font-family: 'NanumSquareRound';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        /* 공통사항 */
+        html, body {
+            padding: 0;
+            margin: 0;
+            font-family: 'NanumSquareRound', sans-serif;
+        }
+
+        #chatroom {
+            width: 85vw;
+            height: 85vh;
+            margin: 25px auto 0;
+            border: 1px solid #e6e6e6;
+            border-radius: 6px;
+            padding: 0 15px;
+            font-size: 15px;
+            background: #f8f9fa;
+        }
+
+        .submit_area {
+            width: 90vw;
+            margin: 5px auto 0;
+        }
+
+        .submit_area #message {
+            width: 85%;
+            height: 26px;
+            border: 1px solid #9e9e9e;
+            border-radius: 5px;
+            font-family: 'NanumSquareRound';
+        }
+
+        .submit_area .submit_btn {
+            width: 12%;
+            padding: 7px 0;
+            border: none;
+            border-radius: 5px;
+            background: #fbaf50c4;
+            float: right;
+            font-family: 'NanumSquareRound';
+        }
+    </style>
+</head>
+<body>
+<input type="text" id="nickname" style="display:none" th:value="${mm_name}">
+
+<label for="roomId" class="label label-default">방 번호</label>
+<label th:text="*{room.roomId}" id="roomId" class="form-inline"></label>
+<br>
+<label for="roomName" class="label label-default">방 이름</label>
+<label th:text="*{room.name}" id="roomName" class="form-inline"></label>
+
+<div id="chatroom"></div>
+<div class="submit_area">
+    <input type="text" id="message" placeholder="내용을 입력하세요" autofocus>
+    <button class="submit_btn" id="send">전송</button>
+</div>
+
+<script>
+
+</script>
+</body>
+<script th:inline = "javascript">
+    var webSocket;
+    var nickname;
+    /* <![CDATA[*/
+    var roomId = /*[[${room.roomId}]]*/;
+    /* ]]> */
+    // 채팅방 들어오자마자 바로 연결
+    $(document).ready(function(){
+        nickname = document.getElementById("nickname").value;
+
+        connect();
+    });
+
+    $(document).keydown(function(event){
+        if(event.keyCode == 13){
+            send();
+        }
+    });
+
+    document.getElementById("send").addEventListener("click",function(){
+        send();
+    })
+
+    function connect(){
+        webSocket = new WebSocket("ws://localhost:8080/chat");
+        webSocket.onopen = onOpen;
+        webSocket.onclose = onClose;
+        webSocket.onmessage = onMessage;
+    }
+    function disconnect(){
+        webSocket.send(JSON.stringify({chatRoomId : roomId,type:'LEAVE',writer:nickname}));
+        webSocket.close();
+    }
+    function send(){
+        msg = document.getElementById("message").value;
+        webSocket.send(JSON.stringify({chatRoomId : roomId,type:'CHAT',writer:nickname,message : msg}));
+        document.getElementById("message").value = "";
+    }
+    function onOpen(){
+        webSocket.send(JSON.stringify({chatRoomId : roomId,type:'ENTER',writer:nickname}));
+    }
+    function onMessage(e){
+        data = e.data;
+        chatroom = document.getElementById("chatroom");
+        chatroom.innerHTML = chatroom.innerHTML + "<br>" + data;
+    }
+    function onClose(){
+        disconnect();
+    }
+
+</script>
+</html>

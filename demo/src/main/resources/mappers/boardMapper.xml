@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chan.demo.mapper.boardMapper">
+
+    <select id="getBoardList" resultType="com.chan.demo.vo.boardVO">
+        select
+        po_num, po_bocode, po_name, po_cacode, po_price, po_content, po_mmcode, po_mmname, po_date
+        from post
+        order by po_num desc limit 1000
+    </select>
+
+    <insert id="postWrite">
+        INSERT INTO demo.post (`PO_BOCODE`, `PO_NAME`, `PO_CACODE`, `PO_PRICE`, `PO_CONTENT`, `PO_MMCODE`, `PO_MMNAME`, `PO_DATE`)
+        VALUES (#{po_bocode}, #{po_name}, #{po_cacode}, #{po_price}, #{po_content}, #{po_mmcode}, #{po_mmname}, #{po_date});
+    </insert>
+
+    <select id="postView" resultType="com.chan.demo.vo.boardVO">
+        select
+        po_num, po_bocode, po_name, po_cacode, po_price, po_content, po_mmcode, po_mmname, po_date
+        from post
+        where po_num = #{po_num}
+    </select>
+
+    <delete id="postDelete">
+        delete
+        from post
+        where po_num = #{po_num}
+    </delete>
+
+</mapper>

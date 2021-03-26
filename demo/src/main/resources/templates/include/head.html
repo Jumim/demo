@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<div class="head" th:fragment="head">
+
+    <style>
+
+    @font-face {
+        font-family: 'NanumSquareRound';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    /* 공통사항 */
+    html, body {
+        padding: 0;
+        margin: 0;
+        font-family: 'NanumSquareRound', sans-serif;
+    }
+
+    body {
+        background-color: #f8f9fa;
+    }
+
+    h1, h2, h3, h4, h5, h6, span, p {
+        margin: 0;
+    }
+
+    a {
+        text-decoration: none;
+        color: #000;
+    }
+
+    .container {
+        max-width: 900px;
+        background: #fff;
+        border-radius: 14px;
+        margin: 0 auto;
+        padding: 40px 0;
+        box-shadow: 1px 2px 6px 0px #bbbbbb;
+        margin-top: 160px !important;
+    }
+
+    /* 헤더부분 */
+    .head {
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: #fff;
+        width: 100%;
+        height: 65px;
+        border-bottom: 1px solid #e6e6e6;
+        z-index: 2;
+    }
+
+    .head .area {
+        max-width: 920px;
+        height: 65px;
+        line-height: 68px;
+        margin: 0 auto;
+        align-self: center;
+        text-align: center;
+    }
+
+    .head .area i {
+        font-size: 24px;
+        color: #fbaf50c4;
+        cursor: pointer;
+    }
+
+    .head .area a {
+        position: relative;
+    }
+
+    .head .area a:nth-child(1) {
+        float: left;
+    }
+
+    .head .area a:nth-child(2) {
+
+    }
+
+    .head .area a:nth-child(3) {
+        float: right;
+        padding-top: 2px;
+    }
+
+    </style>
+
+    <div class="area" th:if="${mm_name != null}">
+        <a href="/" class="a_home">로고</a>
+
+        <a href="/board" class="a_board">중고거래</a>
+
+        <a href="/logout"><i class="fa fa-sign-out-alt"></i></a>
+        <!--<div class="info">
+            <p th:text="${mm_name}"></p>
+            <p th:text="${mm_lev}"></p>
+        </div>-->
+    </div>
+
+    <div class="area" th:unless="${mm_name != null}">
+        <a href="/login"><i class="fa fa-sign-in-alt"></i></a>
+    </div>
+
+</div>
+</html>

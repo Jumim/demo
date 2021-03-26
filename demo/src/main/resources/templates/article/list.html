@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>게시판 리스트</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+    .fakeimg {
+        height: 200px;
+        background: #aaa;
+    }
+
+    .write_btn {
+        position: relative;
+        background-color: #fbaf50d9;
+        border: none;
+        border-radius: 6px;
+        font-size: 14px;
+        float: right;
+        margin-top: -28px;
+        margin-right: 22px;
+        padding: 8px 12px;
+        cursor: pointer;
+    }
+
+    /* 데이터테이블 영역 */
+    .container {
+        min-height: 1155px;
+    }
+
+    .container h2 {
+        padding-left: 34px;
+    }
+
+    .sorting_disabled {
+        display: none;
+    }
+
+    .dataTables_info {
+        display: none;
+    }
+
+    .paginate_button {
+        padding: 6px 10px;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .paginate_button.current {
+        border-radius: 5px;
+        background: #fcbb6a;
+    }
+
+    .dataTables_paginate {
+        float: none;
+        text-align: right;
+        padding-top: 2em;
+        text-align-last: center;
+    }
+
+    /* 테이블 css */
+    table {
+        border-collapse: collapse;
+    }
+
+    thead {
+        display:none;
+    }
+
+    tbody tr {
+        height: 150px;
+        border-bottom: 2px solid #eeeeee;
+    }
+
+    tbody td:nth-child(1) {
+        align-self: center;
+        text-align: center;
+        padding: 35px 30px;
+        width: 150px;
+    }
+
+    tbody td div.no-image {
+        width: 100%;
+        height: 132px;
+        border: 1px solid #dcdcdc;
+        border-radius: 6px;
+    }
+
+    tbody td a p {
+        font-size: 15px;
+        color: #7b7b7b;
+        transform: skew(-0.03deg);
+        margin: 6px 0;
+        font-weight: 600;
+    }
+
+    tbody td a p:nth-child(1) {
+        font-size: 22px;
+        color: #000;
+        font-weight: 800;
+    }
+
+    tbody td a p:nth-child(2) {
+        color: #fbaf50;
+        font-size: 18px;
+    }
+
+
+
+
+    </style>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $("#writeBtn").click(function(){
+    	    location.href ="write";
+        });
+
+        $.ajax({
+            url: "boardList",
+            success: function(result) {
+                var html = "";
+    	        result.forEach(function(item){
+        	        html+= "<tr> <td> <div class='no-image'></div> </td> <td> <a href = 'postView?po_num=" + item.po_num + "'><p>" + item.po_name + "</p><p>" + numberWithCommas(item.po_price) + "원</p><p>" + item.po_mmname + "</p></a>"
+                })
+
+                $("#listArea").append(html);
+
+                //데이터테이블
+                $('#table').DataTable({
+                    "searching": false,
+                    "lengthChange": false,
+                    "pageLength": 5,
+                    "ordering": false,
+                    "language": {
+                        "paginate": {
+                            "next": "다음",
+                            "previous": "이전"
+                        }
+                   }
+                });
+            }
+        });
+
+        $("#deleteBtn").click(function(){
+    	    location.href ="write";
+        });
+
+    });
+
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    </script>
+</head>
+<body>
+
+<div th:replace="/include/head :: head"></div>
+
+<div class="container" style="margin-top:30px">
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>중고거래</h2>
+            <table id="table" class="display" style="width:100%">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody id="listArea">
+                </tbody>
+            </table>
+            <button type="button" class="write_btn" id="writeBtn">글쓰기</button>
+        </div>
+    </div>
+</div>
+
+<div th:replace="/include/footer :: footer"></div>
+
+</body>
+</html>
